@@ -3,42 +3,43 @@ const axios = require('axios').default;
 const wordsModel = require('../Models/word');
 
 router.get('/validity', async(req, res)=>{
-    const headers = req.headers;
-    const access_token_withBearer = headers['authorization'];
+//     const headers = req.headers;
+//     const access_token_withBearer = headers['authorization'];
 
-    if(!access_token_withBearer) return res.status(400).json({msg:"Did not send the access token"})
+//     if(!access_token_withBearer) return res.status(400).json({msg:"Did not send the access token"})
 
     const word = req.body.word;
+    console.log(word);
 
-    var options = {
-        method: 'GET',
-        url: `https://wordsapiv1.p.rapidapi.com/words/${word}/definitions`,
-        headers: {
-            'x-rapidapi-host': 'wordsapiv1.p.rapidapi.com',
-            'x-rapidapi-key': process.env.rapid_api_key
-        }
-    };
+//     var options = {
+//         method: 'GET',
+//         url: `https://wordsapiv1.p.rapidapi.com/words/${word}/definitions`,
+//         headers: {
+//             'x-rapidapi-host': 'wordsapiv1.p.rapidapi.com',
+//             'x-rapidapi-key': process.env.rapid_api_key
+//         }
+//     };
 
-    await axios.get('https://people.googleapis.com/v1/people/me?personFields=emailAddresses',
-    {
-        headers: {
-            'Accept': 'application/json',
-            'Authorization': access_token_withBearer
-        }
-    })
-    .then(async(response)=>{
-        if(response){
+//     await axios.get('https://people.googleapis.com/v1/people/me?personFields=emailAddresses',
+//     {
+//         headers: {
+//             'Accept': 'application/json',
+//             'Authorization': access_token_withBearer
+//         }
+//     })
+//     .then(async(response)=>{
+//         if(response){
             await axios.request(options)
             .then( (validityResponse)=> {
                 return res.status(200).json({validity:true})
             }).catch(function (error) {
                 return res.status(400).json({validity:false});
             });
-        }
-    })
-    .catch(err=>{
-        return res.status(401).json({msg:"Invalid Access token. not authorized"});
-    })
+//         }
+//     })
+//     .catch(err=>{
+//         return res.status(401).json({msg:"Invalid Access token. not authorized"});
+//     })
 })
 
 
