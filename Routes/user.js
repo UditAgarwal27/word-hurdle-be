@@ -176,7 +176,7 @@ router.post('/thirdPartyAuthentication', async (req, res) => {
                 console.log("some errror occurde in finding the user in google api for the first time : ", err);
             })
         console.log("user response data is : ",userResponseObject);
-        return res.status(200).json(response.data);
+        return res.status(200).json(userResponseObject);
     })
     .catch((err) => console.log("something wrong happened in fetching accesss token the first time : ", err));
 })
