@@ -11,14 +11,14 @@ router.get('/validity', async(req, res)=>{
     const word = req.body.word;
     console.log(word);
 
-//     var options = {
-//         method: 'GET',
-//         url: `https://wordsapiv1.p.rapidapi.com/words/${word}/definitions`,
-//         headers: {
-//             'x-rapidapi-host': 'wordsapiv1.p.rapidapi.com',
-//             'x-rapidapi-key': process.env.rapid_api_key
-//         }
-//     };
+    var options = {
+        method: 'GET',
+        url: `https://wordsapiv1.p.rapidapi.com/words/${word}/definitions`,
+        headers: {
+            'x-rapidapi-host': 'wordsapiv1.p.rapidapi.com',
+            'x-rapidapi-key': process.env.rapid_api_key
+        }
+    };
 
 //     await axios.get('https://people.googleapis.com/v1/people/me?personFields=emailAddresses',
 //     {
@@ -79,6 +79,31 @@ router.get('/getAWord', async(req,res)=>{
 //     .catch(err=>{
 //         return res.status(401).json({msg:"Invalid Access token. not authorized"});
 //     })
+
+})
+
+
+//api to get hints;
+router.get("/getAHint", async(req, res)=>{
+    const word = req.body.word;
+    console.log(word);
+
+    var options = {
+        method: 'GET',
+        url: `https://wordsapiv1.p.rapidapi.com/words/${word}/definitions`,
+        headers: {
+            'x-rapidapi-host': 'wordsapiv1.p.rapidapi.com',
+            'x-rapidapi-key': process.env.rapid_api_key
+        }
+    };
+
+    await axios.request(options)
+    .then( (hintsResponse)=> {
+        return res.status(200).json({hint: hintsResponse.data.definitions[0].definition})
+    }).catch(function (error) {
+        return res.status(400).json({hint:"No hints was found"});
+    });
+
 
 })
 
