@@ -44,23 +44,23 @@ router.get('/validity', async(req, res)=>{
 
 
 router.get('/getAWord', async(req,res)=>{
-    const header = req.headers;
-    const access_token_withBearer = header['authorization'];
+//     const header = req.headers;
+//     const access_token_withBearer = header['authorization'];
 
     const noOfLetter = req.body.dificulty;
     console.log(noOfLetter);
 
-    if(!access_token_withBearer) return res.status(400).json({msg:"User did not send an access token"});
+//     if(!access_token_withBearer) return res.status(400).json({msg:"User did not send an access token"});
 
-    await axios.get('https://people.googleapis.com/v1/people/me?personFields=emailAddresses',
-    {
-        headers: {
-            'Accept': 'application/json',
-            'Authorization': access_token_withBearer
-        }
-    })
-    .then(async(response)=>{
-        if(response) {
+//     await axios.get('https://people.googleapis.com/v1/people/me?personFields=emailAddresses',
+//     {
+//         headers: {
+//             'Accept': 'application/json',
+//             'Authorization': access_token_withBearer
+//         }
+// //     })
+//     .then(async(response)=>{
+//         if(response) {
             await wordsModel.findOne({"noOfLetter":noOfLetter})
             .then(wordResponse=>{
                 if(wordResponse){
@@ -73,11 +73,11 @@ router.get('/getAWord', async(req,res)=>{
             .catch(err=>{
                 return res.status(500).json({msg:"Server error in fetching the word"});
             })
-        }
-    })
-    .catch(err=>{
-        return res.status(401).json({msg:"Invalid Access token. not authorized"});
-    })
+//         }
+//     })
+//     .catch(err=>{
+//         return res.status(401).json({msg:"Invalid Access token. not authorized"});
+//     })
 
 })
 
