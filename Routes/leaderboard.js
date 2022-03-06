@@ -62,9 +62,33 @@ router.post("/storeData", async (req, res) => {
         .catch((err) => {
           console.log("Error occured in fetching score");
         });
+    });
+});
+
+router.get("/getAllUsersData", async (req, res) => {
+  await leaderboardModel
+    .find()
+    .then((response) => {
+      if (!response)
+        return res
+          .status(500)
+          .json({ msg: "Server error in fetching the leaderboard records" });
+
+      console.log(response);
+
+      var finalScoreObject = [];
+      for (var i = 0; i < response.length; i++) {
+        var scoreObject = {};
+        scoreObject.email = response[i].email;
+        scoreObject.score = response[i].score;
+        finalScoreObject.push(scoreObject);
+      }
+      res.status(200).json({ scores: finalScoreObject });
     })
     .catch((err) => {
-      console.log("Server error in fetching user details");
+      console.log(
+        "Server error in fetching the leaderboard score of every user"
+      );
     });
 });
 
