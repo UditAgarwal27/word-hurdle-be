@@ -16,10 +16,12 @@ app.use(bodyParser.json());
 //Routes handler
 const userRoute = require('./Routes/user.js');
 const wordRoute = require('./Routes/word');
+const leaderboardRoute = require('./Routes/leaderboard');
 app.use('/auth', userRoute);
 app.use('/auth', userRoute);
 app.use('/auth', userRoute);
 app.use('/word', wordRoute)
+app.use('/leaderboard', leaderboardRoute);
 
 app.get("/login", async(req, res)=>{
     console.log("the first time fetching access token  is send here : ", req.body);
