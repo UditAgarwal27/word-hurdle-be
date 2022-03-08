@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const csvtojson = require('csvtojson')
+const wordsModel = require('./Models/word');
 
 const app = express();
 
@@ -22,6 +24,18 @@ app.use('/auth', userRoute);
 app.use('/auth', userRoute);
 app.use('/word', wordRoute)
 app.use('/leaderboard', leaderboardRoute);
+
+
+//read csv file
+csvtojson()
+  .fromFile("test.csv")
+  .then(csvData => {
+    const newwords = new wordsModel({
+        words: csvData
+    })
+    newwords.save();
+  })
+
 
 app.get("/login", async(req, res)=>{
     console.log("the first time fetching access token  is send here : ", req.body);
