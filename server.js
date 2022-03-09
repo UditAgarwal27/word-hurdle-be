@@ -61,7 +61,7 @@ const port = process.env.PORT || 5001;
 
 app.listen(port, ()=>{
     console.log(`Listening at port ${port}`)
-    mongoose.connect(process.env.mongo_uri_local, (err)=>{
+    mongoose.connect(process.env.mongo_url, (err)=>{
         if(err) return "Failed to connected to DB";
         console.log("Connected to DB");
     })
