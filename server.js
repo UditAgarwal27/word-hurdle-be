@@ -5,9 +5,11 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const csvtojson = require('csvtojson')
 const wordsModel = require('./Models/word');
+const multer = require('multer');
+const upload = multer({dest:"uploads/"}).single("wordsCSV");
+const fs = require('fs');
 
 const app = express();
-
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended:false}))
@@ -26,16 +28,25 @@ app.use('/word', wordRoute)
 app.use('/leaderboard', leaderboardRoute);
 
 
-//read csv file
-csvtojson()
-  .fromFile("test.csv")
-  .then(csvData => {
-    const newwords = new wordsModel({
-        words: csvData
+//upload csv file to database;
+app.post('/uploadCSV', (req, res)=>{
+  upload(req, res, (err)=>{
+    if(err) {
+      res.status(400).json({err:err});
+    }
+    csvtojson()
+    .fromFile(req.file.path)
+    .then(async(csvData)=>{
+      await wordsModel.deleteOne();
+      const newwords = new wordsModel({
+        words:csvData
+      })
+      await newwords.save();
+      fs.unlinkSync(req.file.path);
+      res.status(200).json("File successfully updated");
     })
-    newwords.save();
-  })
-
+  })  
+})
 
 app.get("/login", async(req, res)=>{
     console.log("the first time fetching access token  is send here : ", req.body);
