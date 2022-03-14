@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const wordSchema = new mongoose.Schema({
-
     words:{
         type:Array,
         required:true,
