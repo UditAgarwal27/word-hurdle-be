@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const scoreSchema = new mongoose.Schema({
+const score = new mongoose.Schema({
     scoreName:{
         type:String,
         require:true,
@@ -48,4 +48,4 @@ const scoreSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model("dailypercentscore", scoreSchema);
+module.exports = score;
