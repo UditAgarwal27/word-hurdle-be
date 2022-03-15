@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const scoreModel = require('../Models/score');
 
-const {updateScoreOneClassInDatabase, updateScoreTwoClassInDatabase, updateScoreThreeClassInDatabase, updateScoreFourClassInDatabase, updateScoreFiveClassInDatabase, updateScoreSixClassInDatabase, updateScoreSevenClassInDatabase, updateScoreEightClassInDatabase} = require('../Services/database');
+const {update_score_one_class, update_score_two_class, update_score_three_class, update_score_four_class, update_score_five_class, update_score_six_class, update_score_seven_class, update_score_eight_class }= require('../Services/database');
 const {findPercentScore} = require('../Services/score');
 
 router.post("/new", async(req, res)=>{
@@ -21,35 +21,35 @@ router.post("/dailyScore", async (req, res) => {
         finalScore = score.scoreOne + score.scoreTwo + score.scoreThree + score.scoreFour + score.scoreFive + score.scoreSix + score.scoreSeven + score.scoreEight;
         switch(noOfAttempts) { 
             case 1:
-                updateScoreOneClassInDatabase(score.scoreOne);
+                update_score_one_class(score.scoreOne);
                 percentScore = findPercentScore(score.scoreOne, finalScore);
                 break;
             case 2:
-                updateScoreTwoClassInDatabase(score.scoreTwo);
+                update_score_two_class(score.scoreTwo);
                 percentScore = findPercentScore(score.scoreTwo, finalScore);
                 break;
             case 3:
-                updateScoreThreeClassInDatabase(score.scoreThree);
+                update_score_three_class(score.scoreThree);
                 percentScore = findPercentScore(score.scoreThree, finalScore);
                 break;
             case 4:
-                updateScoreFourClassInDatabase(score.scoreFour);
+                update_score_four_class(score.scoreFour);
                 percentScore = findPercentScore(score.scoreFour, finalScore);
                 break;
             case 5:
-                updateScoreFiveClassInDatabase(score.scoreFive);
+                update_score_five_class(score.scoreFive);
                 percentScore = findPercentScore(score.scoreFive, finalScore);
                 break;
             case 6:
-                updateScoreSixClassInDatabase(score.scoreSix);
+                update_score_six_class(score.scoreSix);
                 percentScore = findPercentScore(score.scoreSix, finalScore);
                 break;
             case 7:
-                updateScoreSevenClassInDatabase(score.scoreSeven);
+                update_score_seven_class(score.scoreSeven);
                 percentScore = findPercentScore(score.scoreSeven, finalScore);
                 break;
             case 8:
-                updateScoreEightClassInDatabase(score.scoreEight);
+                update_score_eight_class(score.scoreEight);
                 percentScore = findPercentScore(score.scoreEight, finalScore);
                 break;
         }
