@@ -3,49 +3,49 @@ const mongoose = require('mongoose');
 const scoreSchema = new mongoose.Schema({
     scoreName:{
         type:String,
-        require:true,
+        required:true,
         default:"DailyScore"
     },
-    scoreOne:{
+    score1:{
         type:Number,
         required:true,
         default:0
     },
-    scoreTwo:{
+    score2:{
         type:Number,
         required:true,
         default:0
     },
-    scoreThree:{
+    score3:{
         type:Number,
         required:true,
         default:0
     },
-    scoreFour:{
+    score4:{
         type:Number,
         required:true,
         default:0
     },
-    scoreFive:{
+    score5:{
         type:Number,
         required:true,
         default:0
     },
-    scoreSix:{
+    score6:{
         type:Number,
         required:true,
         default:0
     },
-    scoreSeven:{
+    score7:{
         type:Number,
         required:true,
         default:0
     },
-    scoreEight:{
+    score8:{
         type:Number,
         required:true,
         default:0
-    }
+    },
 })
 
 module.exports = mongoose.model("dailypercentscore", scoreSchema);
