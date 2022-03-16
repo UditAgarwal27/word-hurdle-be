@@ -17,6 +17,9 @@ const score = require("./src/v1/modules/score/score.router");
 app.use("/v1/word", word);
 app.use("/v1/score", score);
 
+//CRON JOBS
+const reset_score_cron = require('./src/v1/util/cron_jobs');
+reset_score_cron.start();
 connect_db();
 
 //STARTING THE SERVER
