@@ -1,8 +1,10 @@
 const router = require('express').Router();
+
 const scoreModel = require('../Models/score');
 
 const {update_score_class }= require('../Services/database');
 const {findPercentScore} = require('../Services/score');
+
 
 router.post("/new", async(req, res)=>{
     const newScoreModel = new scoreModel();

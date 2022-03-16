@@ -18,11 +18,15 @@ const scoreRoute = require('./Routes/score');
 app.use('/word', wordRoute)
 app.use('/score', scoreRoute);
 
+//CRON JOBS
+const reset_score_cron = require('./Services/cron_jobs');
+reset_score_cron.start();
+
 //STARTING THE SERVER
 const port = process.env.PORT || 5001;
 app.listen(port, () => {
 	console.log(`Listening at port ${port}`)
-	mongoose.connect(process.env.mongo_url, (err) => {
+	mongoose.connect(process.env.mongo_uri_local, (err) => {
 		if (err) return "Failed to connected to DB";
 		console.log("Connected to DB");
 	})
